@@ -13,7 +13,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 public class TempLibraryType {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;

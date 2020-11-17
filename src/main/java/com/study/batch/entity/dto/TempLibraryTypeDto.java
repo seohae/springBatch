@@ -6,6 +6,5 @@ import lombok.ToString;
 @Data
 @ToString
 public class TempLibraryTypeDto {
-
     private String libraryType;
 }

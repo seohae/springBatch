@@ -11,12 +11,15 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TempLibraryDto {
-
     private String libraryNm;
     private String bigLocal;
     private String smallLocal;
     private String libraryType;
 
+    /**
+     * TempLibrary
+     * @return
+     */
     @Builder
     public TempLibrary toEntity() {
         return TempLibrary.builder()
@@ -27,7 +30,10 @@ public class TempLibraryDto {
                 .build();
     }
 
-
+    /**
+     * TempLibraryLocal
+     * @return
+     */
     @Builder
     public TempLibraryLocal toLocalEntity() {
         return TempLibraryLocal.builder()
@@ -36,6 +42,10 @@ public class TempLibraryDto {
                 .build();
     }
 
+    /**
+     * TempLibraryType
+     * @return
+     */
     @Builder
     public TempLibraryType toTypeEntity() {
         return TempLibraryType.builder()

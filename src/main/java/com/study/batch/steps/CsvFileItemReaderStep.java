@@ -27,6 +27,7 @@ public class CsvFileItemReaderStep implements Tasklet {
      */
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
+        log.info("@@언제오냐");
         /* static 변수에 저장 */
         OutputArea.outputList = new FlatFileItemReaderBuilder<TempLibraryDto>()
                                         .name("csvFileItemReader")
@@ -41,7 +42,7 @@ public class CsvFileItemReaderStep implements Tasklet {
                                             setTargetType(TempLibraryDto.class);
                                         }})
                                         .build();
-
+        log.info("@@" + OutputArea.outputList);
         return RepeatStatus.FINISHED;
     }
 }
