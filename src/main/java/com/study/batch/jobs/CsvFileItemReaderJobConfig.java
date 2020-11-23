@@ -4,7 +4,7 @@ import com.study.batch.entity.TempLibrary;
 import com.study.batch.entity.TempLibraryLocal;
 import com.study.batch.entity.TempLibraryType;
 import com.study.batch.entity.dto.TempLibraryDto;
-import com.study.batch.steps.CsvFileItemReaderStep;
+import com.study.batch.steps.CsvFileItemTskletStep;
 import com.study.batch.steps.LibraryItemReaderStep;
 import com.study.batch.steps.LibraryLocalItemReaderStep;
 import com.study.batch.steps.LibraryTypeItemReaderStep;
@@ -42,7 +42,7 @@ public class CsvFileItemReaderJobConfig {
         return jobBuilderFactory.get("csvFileItemReaderJob")
                 /* 1. 엑셀파일 Read 및 static 변수에 저장 */
                 .incrementer(new RunIdIncrementer())
-                .start(csvFileItemReaderTaskStep())
+                .start(csvFileItemTasklsetStep())
                 /* 2. static 변수 안의 데이터를 정규화된 Table에 저장 */
                 .next(libraryItemReaderStep())
                 .next(libraryLocalItemReaderStep())
@@ -55,10 +55,10 @@ public class CsvFileItemReaderJobConfig {
      * @return
      */
     @Bean(name = JOB_NAME +"_task_step")
-    public Step csvFileItemReaderTaskStep(){
-        return stepBuilderFactory.get("csvFileItemReaderTaskStep")
+    public Step csvFileItemTasklsetStep(){
+        return stepBuilderFactory.get("csvFileItemTasklsetStep")
                 /* 엑셀 파일 읽고, static 변수에 저장 */
-                .tasklet(new CsvFileItemReaderStep())
+                .tasklet(new CsvFileItemTskletStep())
                 .build();
     }
 

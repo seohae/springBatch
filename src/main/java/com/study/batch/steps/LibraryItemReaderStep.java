@@ -11,8 +11,12 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.builder.JpaItemWriterBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
+import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
+import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -30,7 +34,19 @@ public class LibraryItemReaderStep {
      */
     @Bean(name = JOB_NAME +"_reader")
     public FlatFileItemReader<TempLibraryDto> csvFileItemReader() {
-        return OutputArea.outputList;
+        return OutputArea.outputList = new FlatFileItemReaderBuilder<TempLibraryDto>()
+                .name("csvFileItemReader")
+                .resource(new ClassPathResource("/temp.csv"))
+                .linesToSkip(1) // header line skip
+                .encoding("MS949")
+                .lineTokenizer(new DelimitedLineTokenizer() {{
+                    setNames("libraryNm", "bigLocal", "smallLocal", "libraryType");
+                    setStrict(false);
+                }})
+                .fieldSetMapper(new BeanWrapperFieldSetMapper<TempLibraryDto>() {{
+                    setTargetType(TempLibraryDto.class);
+                }})
+                .build();
     }
 
     /**
