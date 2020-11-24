@@ -1,8 +1,14 @@
 #jar 시킬때 파람을 줘서 job을 실행 시킬 수 있다. none은 jar을 시행할때 어떤 파람을 안주면 실행을 안하게 설정
+server:
+  port: 6060
 
 spring:
   profiles:
     active: local
+  # BATCH
+  batch:
+    job:
+      enabled: false
   # MYSQL
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
