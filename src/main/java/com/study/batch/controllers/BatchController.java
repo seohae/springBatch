@@ -1,4 +1,4 @@
-package com.study.batch;
+package com.study.batch.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +19,38 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class BatchController {
     private final JobLauncher jobLauncher;
+    /* csv file read Job */
     private final Job csvFileItemReaderJob;
+    /* batch report Job */
+    private final Job batchReportJob;
 
+    /**
+     * csvFileItemReaderJob JOB 실행
+     * @return
+     * @throws JobParametersInvalidException
+     * @throws JobExecutionAlreadyRunningException
+     * @throws JobRestartException
+     * @throws JobInstanceAlreadyCompleteException
+     */
     @GetMapping("/csvFileItemReaderJob")
     public String requestJobPeriodMake() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
         JobParameters jobParameters = new JobParameters();
         jobLauncher.run(csvFileItemReaderJob, jobParameters);
-        return "Job1!";
+        return "csvFileItemReaderJob";
+    }
+
+    /**
+     * batchReportJob JOB 실행
+     * @return
+     * @throws JobParametersInvalidException
+     * @throws JobExecutionAlreadyRunningException
+     * @throws JobRestartException
+     * @throws JobInstanceAlreadyCompleteException
+     */
+    @GetMapping("/batchReportJob")
+    public String batchReportJob() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+        JobParameters jobParameters = new JobParameters();
+        jobLauncher.run(batchReportJob, jobParameters);
+        return "batchReportJob";
     }
 }
