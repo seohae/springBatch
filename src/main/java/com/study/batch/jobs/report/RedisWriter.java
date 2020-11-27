@@ -20,11 +20,13 @@ public class RedisWriter implements ItemWriter<BatchStepExecution> {
 
     @Override
     public void write(List<? extends BatchStepExecution> list) throws Exception {
+        log.info("@@@@@@@@@@@@@@@@@@@@@" +list);
         ValueOperations<String, String> vop = redisTemplate.opsForValue();
 
         ObjectMapper mapper = new ObjectMapper();
         String jsonInString = mapper.writeValueAsString(list);
+        log.info("@@@@@@@@@@@@@@@@@@@@@" +jsonInString);
 
-        vop.set("batchStepExcecutionList", jsonInString);
+        vop.set("test", jsonInString);
     }
 }

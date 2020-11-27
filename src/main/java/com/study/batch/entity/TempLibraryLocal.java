@@ -15,10 +15,13 @@ import javax.persistence.*;
 public class TempLibraryLocal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idx")
     private Long idx;
 
+    @Column(name = "big_local")
     private String bigLocal;
 
+    @Column(name = "small_local")
     private String smallLocal;
 
 }

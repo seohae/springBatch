@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,8 +26,10 @@ public class BatchStepExecution {
     @Column(name = "JOB_EXECUTION_ID")
     private Long jobExecutionId;
     @Column(name = "START_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime startTime;
     @Column(name = "END_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime endTime;
     @Column(name = "STATUS")
     private String status;

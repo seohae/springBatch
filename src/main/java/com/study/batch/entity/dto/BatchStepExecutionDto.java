@@ -1,8 +1,11 @@
 package com.study.batch.entity.dto;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+
 
 @Data
 @Builder
@@ -14,7 +17,9 @@ public class BatchStepExecutionDto {
     private Long version;
     private String stepName;
     private Long jobExecutionId;
-    private LocalDateTime startTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDateTime  startTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime endTime;
     private String status;
     private Long commitCount;
@@ -27,5 +32,6 @@ public class BatchStepExecutionDto {
     private Long rollbackCount;
     private String exitCode;
     private String exitMessage;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime lastUpdated;
 }
